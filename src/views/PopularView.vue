@@ -17,7 +17,9 @@
        
     </div>
     <div class="pagination">
-      <button @click="$store.commit('seeMore')">See More</button></div>
+      <button v-if="$store.state.index > 1" @click="$store.commit('prevPage')">{{$store.state.index - 1}}</button>
+      <button>{{$store.state.index}}</button>
+      <button @click="$store.commit('nextPage')">Next Page</button></div>
     </div>
     
     <div v-if="!$store.state.movies">
@@ -30,6 +32,7 @@
   </div>
 </template>
 
+
 <script>
 // @ is an alias to /src
 
@@ -41,15 +44,7 @@ export default {
   },
   mounted() {
     this.$store.state.movies = null
-    fetch("https://cors-anywhere.herokuapp.com/https://gophie-ocena.herokuapp.com/download/highest/", {
-      method: "POST",  
-      // headers: {
-      //   "Access-Control-Allow-Origin" : "*",
-      //   "Content-Type" : "application/json",
-       
-      // },
-      body: JSON.stringify(this.$store.state.details)
-    })
+    fetch(`https://cors-anywhere.herokuapp.com/http://movie-library-backend.herokuapp.com/getData/?page=${this.$store.state.index}&engine=fzmovies`)
     .then(resp => resp.json())
     .then(data => {
       console.log(data)
@@ -77,7 +72,6 @@ export default {
   /* height: 40em; */
   background: #2c3e50;
   padding: 1em;
-  border-radius: 1em;
   box-shadow: 3px 3px 5px 7px rgba(0,0,0,0.3);
 }
 
@@ -107,6 +101,7 @@ export default {
   align-items: center;
   width: 100%;
 }
+
 .no-show h4 {
     margin-top: 1em;
   }
@@ -140,7 +135,7 @@ p {
 }
 
 .pagination button {
-  border-radius: 5px;
+   border-radius: 5px;
   font-size: 1.3em;
   padding: 1em;
   border: none;

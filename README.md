@@ -1,4 +1,23 @@
-# downloader
+# Movie Downloader
+
+### Screenshot
+
+![](./src/assets/screenshot.png)
+
+### Link
+
+- Visit Live site - [Live URL](https://thefacemovies.web.app)
+
+### Built with
+
+- Semantic HTML5 markup
+- CSS custom properties
+- Vue JS
+
+## Author
+
+- Portfolio - [Ezekiel The Face](https://thefacecodes.web.app)
+- Twitter - [@thefacecodes](https://www.twitter.com/thefacecodes)
 
 ## Project setup
 ```
